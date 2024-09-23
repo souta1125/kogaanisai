@@ -22,7 +22,6 @@ body{
 
 .page-content{
   background-color:#f7f5f5;
-  box-shadow: 0 0 3px #333;
   color: var(--txt);
   height: 100%;
   width: 100%;
@@ -45,7 +44,7 @@ main{
 
   h1{
     color: var(--primary);
-    font-size: 5.0rem;
+    font-size: 4.0rem;
     font-weight: 700;
     text-align: center;
 
@@ -53,11 +52,11 @@ main{
       display: block;
     }
     .ja{
-      font-size: 2.5rem;
+      font-size: 2.0rem;
     }
   }
   section{
-    border-bottom: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--tertiary);
     margin: 16px 0;
     padding: 16px;
     width: 100%;
@@ -216,7 +215,24 @@ main{
   padding: 12px;
   position: relative;
   text-align: center;
+  transition: opacity 0.3s;
   width: 100%;
+
+  &:hover{
+    opacity: 0.7;
+  }
+  &[target="_blank"]::after{
+    aspect-ratio: 1;
+    background-image: url('./img/icon/open-in-new.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: '';
+    display: block;
+    height: 20px;
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 12px;
+  }
 }
 
 .list-note{
@@ -258,5 +274,16 @@ main{
       gap: 8px 16px;
     }
   }
+  .slick-dots{
+    li{
+      button::before{
+        color: var(--secondary);
+      }
+    }
+    .slick-active{
+      button::before{
+        color: var(--primary);
+      }
+    }
+  }
 }
-
