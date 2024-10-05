@@ -1,4 +1,4 @@
-$('.slide-wrap').slick({
-  infinite: false,
-  dots: true,
-});
+$(window).load(function(){
+  let w = $('.t-body').width();
+  $('.t-body').attr('style', "--i:" + w + "px");
+})
