@@ -1,5 +1,5 @@
 html{
-  font-size: 10px;
+font-size: 10px;
   /* コピー禁止！！ */
   user-select: none;
   -webkit-user-select: none;
@@ -13,6 +13,7 @@ body{
   color: #000;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
+  height: 100%;
   width: 100%;
   letter-spacing: 0.05rem;
   line-height: 1.5;
@@ -34,12 +35,11 @@ body{
 
 main{
   font-size: 1.3rem;
-  padding: 32px 16px;
+  padding: 32px;
 
   h1{
     color: var(--primary);
     font-weight: 700;
-    line-height: 1.2;
     text-align: center;
 
     span{
@@ -54,18 +54,46 @@ main{
   }
 }
 
+/* time table */
 .t-wrap{
   height: 100%;
   position: relative;
 
   .t-head{
+    background-color: #fff;
+    padding: 32px 0 16px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
     .list-day{
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      
+      .list-item{
+        border-right: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
 
-      li{
-        a{
+        &:last-child{
+          border-right-color: transparent;
+        }
+      }
+    }
+    .list-sort{
+      display: grid;
+      grid-template-columns: repeat(5, 150px);
+      gap: 0 16px;
+      overflow: scroll auto;
+      padding-top: 16px;
+
+      &::-webkit-scrollbar{
+        display: none;
+      }
+
+      .list-item{
+        button{
           border: 1px solid var(--secondary);
           border-radius: 5px;
           color: var(--secondary);
@@ -81,86 +109,58 @@ main{
   .t-body{
     display: grid;
     grid-template-columns: repeat(3, calc(var(--i) * 0.9));
-    grid-template-rows: auto;
-    gap: 0 calc(var(--i) * 0.02);
+    gap: calc(var(--i) * 0.01);
     overflow: scroll auto;
-    scrollbar-width: 100%;
+    padding: 0 calc((var(--i) * 0.05));
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
+    scrollbar-width: 100%;
 
     .t-content{
-      height: 100%;
-      position: relative;
       scroll-snap-align: center;
 
+      #day-02{
+        padding-top: -1000px;
+      }
       .t-content-head{
-        background-color: var(--primary);
-        border-radius: 5px;
+        background-color: var(--secondary);
+        color: #fff;
         padding: 8px;
-        position: sticky;
-        top: 20px;
-        left: 0;
-        width: 100%;
-        z-index: 10;
 
         .t-content-ttl{
-          color: #fff;
           font-size: 1.6rem;
           font-weight: 700;
           text-align: center;
         }
       }
-      .t-content-body{
-        padding-top: 32px;
-      }
-    }
-  }
-}
-
-.t-column-wrap{
-  display: grid;
-  grid-template-columns: 75px 1fr;
-
-  .t-column-left{
-    display: grid;
-    grid-template-rows: 75px;
-    grid-auto-rows: 75px;
-
-    p{
-      text-align: center;
-    }
-    p:nth-child(2n){
-      border-bottom: 1px solid #ccc;
-    }
-  }
-  .t-column-right{
-    display: grid;
-    grid-template-rows: 75px;
-    grid-auto-rows: 75px;
-
-    background-image: repeating-linear-gradient(to bottom, #fff 0, #fff 73.5px, #ccc 75px, #fff 75px);
-
-    .t-content-item{
-      background-color: var(--tertiary);
-      border-radius: 10px;
-      
-      a{
+      .t-column-wrap{
         display: grid;
-        grid-template-columns: 60px 1fr;
-        gap: 16px;
-        height: 100%;
-        width: 100%;
-        padding: 8px;
+        grid-template-columns: 50px 1fr;
+        padding: 8px 0;
 
-        .txtBox{
-          .head{
-            span{
-              margin-right: 8px;
-            }
+        > [class*="t-column"]{
+          display: grid;
+          grid-template-rows: repeat(36, 75px);
+        }
+        .t-column-left{
+          p{
+            grid-row: span 2;
           }
-          .ttl{
-            font-size: 1.8rem;
-            font-weight: 700;
+        }
+        .t-column-right{
+          .t-item{
+            grid-area: var(--start)/1/calc(var(--start) + var(--duration))/2;
+            a{
+              display: block;
+              height: 100%;
+              width: 100%;
+              background-color: var(--tertiary);
+              border-radius: 5px;
+              display: grid;
+              grid-template-columns: 65px 1fr;
+              gap: 0 16px;
+              padding: 5px 8px;
+            }
           }
         }
       }
