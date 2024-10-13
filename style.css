@@ -40,16 +40,19 @@ main{
   h1{
     color: var(--primary);
     font-weight: 700;
+    line-height: 1.2;
+    padding-bottom: 16px;
     text-align: center;
 
     span{
       display: block;
-    }
-    .en{
-      font-size: 4.0rem;
-    }
-    .ja{
-      font-size: 2.0rem;
+
+      &.en{
+        font-size: 4.0rem;
+      }
+      &.ja{
+        font-size: 2.0rem;
+      }
     }
   }
 }
@@ -61,38 +64,51 @@ main{
 
   .t-head{
     background-color: #fff;
-    padding: 32px 0 16px;
+    padding: 16px 0;
     position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 10;
+
     .list-day{
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      
-      .list-item{
+      gap: 8px;
+
+      .list-day-item{
         border-right: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
 
         &:last-child{
           border-right-color: transparent;
         }
+        button{
+          display: block;
+          height: 100%;
+          width: 100%;
+          color: #ccc;
+          padding: 8px;
+          text-align: center;
+
+          &[aria-disabled="false"]{
+            color: var(--primary);
+            font-weight: 700;
+          }
+        }
       }
     }
-    .list-sort{
+    .list-search{
       display: grid;
-      grid-template-columns: repeat(5, 150px);
-      gap: 0 16px;
+      gap: 0 8px;
+      grid-template-columns: repeat(5, 134.4px);
       overflow: scroll auto;
-      padding-top: 16px;
+      padding-top: 8px;
 
       &::-webkit-scrollbar{
         display: none;
       }
 
-      .list-item{
+      .list-search-item{
         button{
           border: 1px solid var(--secondary);
           border-radius: 5px;
@@ -102,30 +118,29 @@ main{
           width: 100%;
           padding: 8px;
           text-align: center;
+
+          &[aria-disabled="false"]{
+            background-color: var(--primary);
+            color: #fff;
+          }
         }
       }
     }
   }
   .t-body{
-    display: grid;
-    grid-template-columns: repeat(3, calc(var(--i) * 0.9));
-    gap: calc(var(--i) * 0.01);
-    overflow: scroll auto;
-    padding: 0 calc((var(--i) * 0.05));
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: 100%;
-
     .t-content{
-      scroll-snap-align: center;
+      height: 100%;
+      position: relative;
 
-      #day-02{
-        padding-top: -1000px;
-      }
       .t-content-head{
-        background-color: var(--secondary);
+        background-color: var(--primary);
         color: #fff;
         padding: 8px;
+        position: sticky;
+        top: 113px;
+        left: 0;
+        width: 100%;
+        z-index: 9;
 
         .t-content-ttl{
           font-size: 1.6rem;
@@ -133,33 +148,68 @@ main{
           text-align: center;
         }
       }
-      .t-column-wrap{
-        display: grid;
-        grid-template-columns: 50px 1fr;
-        padding: 8px 0;
+      .t-content-body{
+        padding-top: 32px;
 
-        > [class*="t-column"]{
+        .t-column-wrap{
           display: grid;
-          grid-template-rows: repeat(36, 75px);
-        }
-        .t-column-left{
-          p{
-            grid-row: span 2;
+          grid-template-columns: 50px 1fr;
+          gap: 0 8px;
+
+          > *{
+            display: grid;
+            grid-auto-rows: var(--row_height);
           }
-        }
-        .t-column-right{
-          .t-item{
-            grid-area: var(--start)/1/calc(var(--start) + var(--duration))/2;
-            a{
-              display: block;
-              height: 100%;
-              width: 100%;
-              background-color: var(--tertiary);
-              border-radius: 5px;
-              display: grid;
-              grid-template-columns: 65px 1fr;
-              gap: 0 16px;
-              padding: 5px 8px;
+          .t-column-left{
+            p{
+              grid-row: span 2;
+              margin-top: -10px;
+
+              &:last-child{
+                grid-row: span 1;
+              }
+            }
+          }
+          .t-column-right{
+            background-image: repeating-linear-gradient(#fff 0, #fff 1px, #ccc 1px, #fff 2px, #fff var(--row_height));
+            
+            .t-item{
+              grid-area: var(--start)/1/calc(var(--start) + var(--duration))/2;
+              a{
+                background-color: var(--secondary);
+                border-radius: 5px;
+                color: #fff;
+                display: block;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                transition: opacity 0.3s;
+
+                &:hover{
+                  opacity: 0.8;
+                }
+                .t-item-inner{
+                  display: flex;
+                  height: 100%;
+                  width: 100%;
+                  padding: 8px;
+
+                  .txtBox{
+                    .head{
+                      span{
+                        margin-right: 4px;
+                      }
+                    }
+                    .schedule{
+                      font-size: 1.6rem;
+                    }
+                    .ttl{
+                      font-size: 1.8rem;
+                      font-weight: 700;
+                    }
+                  }
+                }
+              }
             }
           }
         }
