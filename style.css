@@ -34,41 +34,188 @@ body{
 }
 
 main{
-  font-size: 13px;
+  font-size: 1.3rem;
   padding: 32px;
 
   h1{
     color: var(--primary);
     font-weight: 700;
+    line-height: 1.2;
+    padding-bottom: 16px;
     text-align: center;
 
     span{
       display: block;
-      
+
       &.en{
-        font-size: 40px;
+        font-size: 4.0rem;
       }
       &.ja{
-        font-size: 25px;
+        font-size: 2.0rem;
       }
     }
-  } 
+  }
+}
 
-  .t-wrap{
-    .t-body{
+/* time table */
+.t-wrap{
+  height: 100%;
+  position: relative;
+
+  .t-head{
+    background-color: #fff;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+
+    .list-day{
       display: grid;
-      grid-template-columns: repeat(3, calc(var(--i) * 0.9));
-      overflow: scroll auto;
-      scroll-behavior: smooth;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: 100%;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
 
-      .t-content{
-        scroll-snap-align: center;
-      
+      .list-day-item{
+        border-right: 1px solid #ccc;
+
+        &:last-child{
+          border-right-color: transparent;
+        }
+        button{
+          background-color: #ccc;
+          color: #fff;
+          display: block;
+          height: 100%;
+          width: 100%;
+          padding: 8px;
+          position: relative;
+          text-align: center;
+
+          &[aria-disabled="false"]{
+            background-color: var(--secondary);
+            font-weight: 700;
+
+            &::before{
+              background-color: inherit;
+              z-index: 11;
+              height: calc(tan(60deg) * 20px / 2);
+              content: '';
+              width: 20px;
+              clip-path: polygon(0 0, 100% 0, 50% 100%);
+              position: absolute;
+              bottom: -17px;
+              left: calc(50% - 10px);
+            }
+          }
+        }
+      }
+    }
+    .list-search{
+      display: grid;
+      grid-template-columns: repeat(5, 134.4px);
+      gap: 0 8px;
+      overflow: scroll auto;
+      padding-bottom: 16px;
+      width: 100%;
+
+      &::-webkit-scrollbar{
+        display: none;
+      }
+      .list-search-item{
+        button{
+          border: 2px solid #ccc;
+          border-radius: 5px;
+          color: #ccc;
+          display: block;
+          height: 100%;
+          width: 100%;
+          padding: 8px;
+          text-align: center;
+          
+          &[aria-disabled="false"]{
+            background-color: var(--secondary);
+            border-color: transparent;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .t-body{
+    .t-content{
+      height: 100%;
+      position: relative;
+
+      .t-content-body{
+        padding-top: 32px;
+
         .t-column-wrap{
           display: grid;
           grid-template-columns: 50px 1fr;
+          gap: 0 8px;
+
+          > *{
+            display: grid;
+            grid-auto-rows: var(--row_height);
+          }
+          .t-column-left{
+            p{
+              grid-row: span 2;
+              margin-top: -10px;
+
+              &:last-child{
+                grid-row: span 1;
+              }
+            }
+          }
+          .t-column-right{
+            background-image: repeating-linear-gradient(#fff 0, #fff 1px, #ccc 1px, #fff 2px, #fff var(--row_height));
+            
+            .t-item{
+              display: none;
+              grid-area: var(--start)/1/calc(var(--start) + var(--duration))/2;
+
+              &[aria-disabled="false"]{
+                display: block;
+              }
+              a{
+                background-color: var(--secondary);
+                border-radius: 5px;
+                color: #fff;
+                display: block;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                transition: opacity 0.3s;
+
+                &:hover{
+                  opacity: 0.8;
+                }
+                .t-item-inner{
+                  display: flex;
+                  height: 100%;
+                  width: 100%;
+                  padding: 8px;
+
+                  .txtBox{
+                    .head{
+                      span{
+                        margin-right: 4px;
+                      }
+                    }
+                    .schedule{
+                      font-size: 1.6rem;
+                    }
+                    .ttl{
+                      font-size: 1.8rem;
+                      font-weight: 700;
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
