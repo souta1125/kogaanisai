@@ -34,184 +34,41 @@ body{
 }
 
 main{
-  font-size: 1.3rem;
+  font-size: 13px;
   padding: 32px;
 
   h1{
     color: var(--primary);
     font-weight: 700;
-    line-height: 1.2;
-    padding-bottom: 16px;
     text-align: center;
 
     span{
       display: block;
-
+      
       &.en{
-        font-size: 4.0rem;
+        font-size: 40px;
       }
       &.ja{
-        font-size: 2.0rem;
+        font-size: 25px;
       }
     }
-  }
-}
+  } 
 
-/* time table */
-.t-wrap{
-  height: 100%;
-  position: relative;
-
-  .t-head{
-    background-color: #fff;
-    padding: 16px 0;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-
-    .list-day{
+  .t-wrap{
+    .t-body{
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-
-      .list-day-item{
-        border-right: 1px solid #ccc;
-
-        &:last-child{
-          border-right-color: transparent;
-        }
-        button{
-          display: block;
-          height: 100%;
-          width: 100%;
-          color: #ccc;
-          padding: 8px;
-          text-align: center;
-
-          &[aria-disabled="false"]{
-            color: var(--primary);
-            font-weight: 700;
-          }
-        }
-      }
-    }
-    .list-search{
-      display: grid;
-      gap: 0 8px;
-      grid-template-columns: repeat(5, 134.4px);
+      grid-template-columns: repeat(3, calc(var(--i) * 0.9));
       overflow: scroll auto;
-      padding-top: 8px;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: 100%;
 
-      &::-webkit-scrollbar{
-        display: none;
-      }
-
-      .list-search-item{
-        button{
-          border: 1px solid var(--secondary);
-          border-radius: 5px;
-          color: var(--secondary);
-          display: block;
-          height: 100%;
-          width: 100%;
-          padding: 8px;
-          text-align: center;
-
-          &[aria-disabled="false"]{
-            background-color: var(--primary);
-            color: #fff;
-          }
-        }
-      }
-    }
-  }
-  .t-body{
-    .t-content{
-      height: 100%;
-      position: relative;
-
-      .t-content-head{
-        background-color: var(--primary);
-        color: #fff;
-        padding: 8px;
-        position: sticky;
-        top: 113px;
-        left: 0;
-        width: 100%;
-        z-index: 9;
-
-        .t-content-ttl{
-          font-size: 1.6rem;
-          font-weight: 700;
-          text-align: center;
-        }
-      }
-      .t-content-body{
-        padding-top: 32px;
-
+      .t-content{
+        scroll-snap-align: center;
+      
         .t-column-wrap{
           display: grid;
           grid-template-columns: 50px 1fr;
-          gap: 0 8px;
-
-          > *{
-            display: grid;
-            grid-auto-rows: var(--row_height);
-          }
-          .t-column-left{
-            p{
-              grid-row: span 2;
-              margin-top: -10px;
-
-              &:last-child{
-                grid-row: span 1;
-              }
-            }
-          }
-          .t-column-right{
-            background-image: repeating-linear-gradient(#fff 0, #fff 1px, #ccc 1px, #fff 2px, #fff var(--row_height));
-            
-            .t-item{
-              grid-area: var(--start)/1/calc(var(--start) + var(--duration))/2;
-              a{
-                background-color: var(--secondary);
-                border-radius: 5px;
-                color: #fff;
-                display: block;
-                height: 100%;
-                width: 100%;
-                overflow: hidden;
-                transition: opacity 0.3s;
-
-                &:hover{
-                  opacity: 0.8;
-                }
-                .t-item-inner{
-                  display: flex;
-                  height: 100%;
-                  width: 100%;
-                  padding: 8px;
-
-                  .txtBox{
-                    .head{
-                      span{
-                        margin-right: 4px;
-                      }
-                    }
-                    .schedule{
-                      font-size: 1.6rem;
-                    }
-                    .ttl{
-                      font-size: 1.8rem;
-                      font-weight: 700;
-                    }
-                  }
-                }
-              }
-            }
-          }
         }
       }
     }
